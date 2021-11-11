@@ -4,7 +4,7 @@
 from cmd import Cmd
 
 try:
-    import readline
+    import readline  # noqa: F401
 except ImportError:
     pass
 
@@ -12,8 +12,12 @@ import duckdb
 
 __version__ = '0.1.0'
 
+
 class Gadwall(Cmd):
-    intro = 'Welcome to the gadwall, a duckdb shell. Type help or ? to list commands.\n'
+    intro = (
+        'Welcome to the gadwall, a duckdb shell. '
+        'Type help or ? to list commands.\n'
+    )
     prompt = 'duckdb> '
 
     def __init__(self, file_name):
@@ -39,7 +43,7 @@ class Gadwall(Cmd):
         if not arg:
             sql = 'PRAGMA show_tables;'
         else:
-            sql = f"PRAGMA table_info('{arg}')";
+            sql = f"PRAGMA table_info('{arg}');"
         self.default(sql)
 
     def default(self, arg):
@@ -57,7 +61,6 @@ class Gadwall(Cmd):
         return
 
 
-
 def main():
     from argparse import ArgumentParser, FileType
 
@@ -70,6 +73,7 @@ def main():
         cmd.cmdloop()
     except KeyboardInterrupt:
         pass
+
 
 if __name__ == '__main__':
     main()
