@@ -1,2 +1,3 @@
 dist
 gadwall.egg-info/
+*.ddb
