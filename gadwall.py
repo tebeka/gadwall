@@ -68,6 +68,7 @@ def main():
     parser.add_argument('filename', type=FileType('r'))
     args = parser.parse_args()
 
+    args.filename.close()  # Make windows happy (see issue #1)
     cmd = Gadwall(args.filename.name)
     try:
         cmd.cmdloop()
