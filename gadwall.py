@@ -62,14 +62,16 @@ class Gadwall(Cmd):
 
 
 def main():
-    from argparse import ArgumentParser, FileType
+    from argparse import ArgumentParser
 
     parser = ArgumentParser(description=__doc__)
-    parser.add_argument('filename', type=FileType('r'))
+    parser.add_argument(
+        'filename',
+        help='database file name (use :memory: for in-memory)',
+    )
     args = parser.parse_args()
 
-    args.filename.close()  # Make windows happy (see issue #1)
-    cmd = Gadwall(args.filename.name)
+    cmd = Gadwall(args.filename)
     try:
         cmd.cmdloop()
     except KeyboardInterrupt:
